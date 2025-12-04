@@ -217,14 +217,40 @@ html, body {
 }
   .message {
     position: absolute;
-    top: 20%;
+    /* position above the rose by calculating from viewport center (works responsively) */
+    top: calc(50% - 180px);
     left: 50%;
     transform: translateX(-50%);
-    font-size: 2.5rem;
+
+    /* responsive typography */
+    font-size: clamp(1.2rem, 3.5vw, 2.8rem);
+    line-height: 1;
+
     font-family: 'Scheherazade', serif;
     color: #ffdde8;
     text-shadow: 0 0 10px #ff7aa8, 0 0 20px #ff3e78;
+
+    /* subtle entrance */
     animation: fadeIn 3s ease-in-out infinite alternate;
+
+    /* make sure it doesn't block clicks on smaller screens */
+    pointer-events: none;
+    white-space: nowrap;
+  }
+
+  /* adjust for very small screens */
+  @media (max-width: 420px) {
+    .message {
+      top: calc(50% - 140px);
+      font-size: 1.1rem;
+      padding: 0 8px;
+    }
+  }
+
+  @media (min-width: 1200px) {
+    .message {
+      top: calc(50% - 220px);
+    }
   }
 
   @keyframes fadeIn {
